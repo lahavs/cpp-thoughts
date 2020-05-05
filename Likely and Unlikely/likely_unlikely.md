@@ -7,7 +7,7 @@
 <br></br>
 <a name="goal"/>
 # Goal
-These are macros that enable telling the compiler specific information about the expected value of an expression, which can help the compiler optimize the code in ways that it can't do (Without this extra information).  
+These are macros that enable telling the compiler specific information about the expected value of an expression, which can help the compiler optimize the code in ways it couldn't otherwise (Without this extra information).  
 
 Given a branch:
 ``` cpp

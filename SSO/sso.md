@@ -15,7 +15,7 @@ SSO (Small string optimization), also called "Small object optimization" and "S
 As you already know, constructing an array with static size can be done very quickly: By allocating it on the stack, allocating and deallocation are a simple matter of moving the `%rsp` pointer.  
 But it's not always possible to declare an array on the stack:
 1. Sometimes the size of the array is not known at compile time. [(:star:)](#star_1)
-2. By default the stack is rather small compared to the heap, thus care must be taken to not reach it capacity.
+2. By default the stack is rather small compared to the heap, thus care must be taken to not reach its capacity.
 
 <br></br>
 <a name="star_1"/>
@@ -114,7 +114,7 @@ Of course SSO does not come without any drawbacks:
 2. Implementing an SSO object includes making trade-offs, which can hurt performance if the wrong ones are taken.  
     For example, the code that manages the local/non-local modes can have a negative impact on performance, as a naive implementation might add an **extra** branch in the "add new element" functions, as they will first **check if in local mode**, and if not check if reached the current capacity.  
     This extra branch (Which is executed whenever a new object is added to the array) might hurt performance.
-3. Move operations on an SSO-ed object in local mode might be less efficient than an implementation which only uses dynamic memory allocations, as moves on the local buffer require moving **each element** into its new location, in contrast with a pure dynamically allocated buffer, in which only a simple **pointer move** his needed.
+3. Move operations on an SSO-ed object in local mode might be less efficient than an implementation which only uses dynamic memory allocations, as moves on the local buffer require moving **each element** into its new location, in contrast with a pure dynamically allocated buffer, in which only a simple **pointer move** is needed.
 
 
 <br></br>
@@ -261,7 +261,7 @@ Of course these are just some specific optimizations - Other implementations ma
 
 For example, let's consider some of LLVM's `SmallVector` implementation details:
 1. The implementation allows to [type-erase](../shared_ptr) the **templated size** of the local buffer, something that is not possible with our implementation.  
-    This is done by making `SmallVector` inherit from a `SmallVectorImpl` class which is not templated on the size but rather stores it inside its `m_capacity` data member, and the code that want to use a type-erased `SmallVector` simply uses `SmallVectorImpl`.
+    This is done by making `SmallVector` inherit from a `SmallVectorImpl` class which is not templated on the size but rather stores it inside its `m_capacity` data member, and the code that wants to use a type-erased `SmallVector` simply uses `SmallVectorImpl`.
     Basically something like:
     ``` cpp
     template<typename T>

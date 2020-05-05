@@ -479,7 +479,7 @@ While this will indeed work, it has 1 major drawback: We don't know _**WHY the c
 
 While with this small example it might not seem important, for a more complicated verification with multiple "sub-assertions" in it, knowing what exactly is wrong with the value can be very helpful in fixing it.
 
-Of course it's still possible to have this behaviour by using only use `static_assert()`, for example by splitting the verification function into multiple sub-functions, each one verifying only a single condition and assert each one of them alone.  
+Of course it's still possible to have this behaviour by only using `static_assert()`, for example by splitting the verification function into multiple sub-functions, each one verifying only a single condition and assert each one of them alone.  
 But, this will become very cumbersome and verbose.
 
 Instead, we'll go with using `constexpr_assert()`, which will result in a more "natural" way of writing the verification code (i.e. No need to split the verification function), and it will not be much more verbose than the **first** `static_assert()` version, while also allowing us to know exactly **where** the verification failed.
@@ -724,7 +724,7 @@ While it's almost always best to move time calculations to be performed during c
     }
     ```
 
-Given the above restrictions, it order for a constexpr variable to be used in multiple translation units, it must be **defined** is all of them.
+Given the above restrictions, in order for a constexpr variable to be used in multiple translation units it must be **defined** in all of them.
 
 Continuing with the above examples, if one wants to use `value` in multiple translation units, it will (Most likely) be defined in a header file:
 ``` cpp

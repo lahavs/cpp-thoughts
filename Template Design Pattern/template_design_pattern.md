@@ -142,7 +142,7 @@ In this case, the most easy thing to do is to move this common behaviour into a
 
     
     This can quickly result in unreadable and unmaintainable code: In order to see what `ConcreteComponent1` does, one has to traverse to **whole** inheritance tree in order to see if some classes along the way give their own implementation to some subaction, which is really not something you want to do.  
-    While this might seem trivial when you read it here, be wary that this behaviour can manifest itself **during time** - Only after a few weeks/months/years, when more concrete components will be implemented, where such similarities will pop up (And the need to have these "checkpoints")
+    While this might seem trivial when you read it here, be wary that this behaviour can manifest itself **later in development** - Only after a few weeks/months/years, when more concrete components will be implemented, where such similarities will pop up (And the need to have these "checkpoints")
 
 <br></br>
 <a name="avoid_these_bad_things"/>
@@ -266,8 +266,8 @@ Don't get me wrong, I'm not advocating against implementing this pattern using 
 It can have great benefits to the overall structure of the code, but only if it was carefully thought about, and implemented properly.
 
 Therefore, I'd rewrite the "workflow" mentioned in the first paragraph as follows:
-1. First, thing about whether or not you even need to use this pattern. Maybe the code duplication that it will save is so small and minor, that all the hassle around it will not worth it.
-2. If you indeed decide on using this pattern, make **absolutely sure** you got all the edge cases before you actually implement the template class (This is usually impossible to get perfect as new demands can come up a few years from now - Ones that you didn't even think that were possible).
+1. First, think about whether or not you even need to use this pattern. Maybe the code duplication that it will save is so small and minor, that all the hassle around it will not be worth it.
+2. If you indeed decide on using this pattern, make **absolutely sure** you got all the edge cases before you actually implement the template class (This is usually impossible to get perfect as new demands can come up a few years from now - Ones you didn't even think were possible).
 3. If you decide on implementing this with inheritance, make the inheritance tree **shallow** - Make sure not to have components that inherit from other components (Avoid having these "checkpoint components"). Instead, make sure that each component only inherits directly from the base logic.
 4. Think if some components are an entity of their own, which can be used in contexts other than where the components will be used. If so, think about implementing this pattern using composition instead.
 5. If indeed you decide to implement this pattern using composition, make sure the number of different objects (And thus, interfaces) is small - No one likes to see an object that accepts 20 interfaces in order to work.

@@ -129,7 +129,7 @@ If the function was called with an object that inherits from `A` and overrides 
 GCC uses sophisticated heuristics to determine which function call, if any, is likely to be the target of the virtual call.  
 For example, it seems that if it detects that in the current translation unit no other class inherits from A, then it will guess that no other class will inherit from A in the **entire program**, and thus optimize for this case.  
 
-Theoretically, it can also guess more than 1 targets (And compare against say 2 pointers), but I've never seen this happen though.
+Theoretically, it can also guess more than 1 targets (And compare against say 2 pointers), though I've never seen this happen.
 
 Let's look at a more complex code:
 ``` cpp
